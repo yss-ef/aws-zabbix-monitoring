@@ -1,86 +1,100 @@
-# ☁️ Infrastructure Cloud de Supervision Centralisée (AWS + Zabbix)
+# ☁️ AWS Centralized Cloud Monitoring Infrastructure | Zabbix & Docker
 
-![AWS](https://img.shields.io/badge/AWS-FF9900?style=for-the-badge&logo=amazon-aws&logoColor=white)
-![Zabbix](https://img.shields.io/badge/Zabbix-D60000?style=for-the-badge&logo=zabbix&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
-![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
-![Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
+> **Academic Project - Cloud Computing** | **Year:** 2025/2026 | **Author:** Youssef Fellah
 
-> **Projet Académique - Cloud Computing**
-> **Année :** 2025/2026
-> **Auteur :** Fellah Youssef
+## 📑 Table of Contents
 
-## 📋 Description du Projet
+* [Project Overview](https://www.google.com/search?q=%23-project-overview)
+* [Video Presentation](https://www.google.com/search?q=%23-video-presentation)
+* [Architecture](https://www.google.com/search?q=%23%EF%B8%8F-architecture)
+* [Repository Structure](https://www.google.com/search?q=%23-repository-structure)
+* [Quick Start Guide](https://www.google.com/search?q=%23-quick-start-guide)
+* [Web Interface Access](https://www.google.com/search?q=%23-web-interface-access)
+* [Project Report](https://www.google.com/search?q=%23-project-report)
 
-Ce projet vise la mise en œuvre d'une **infrastructure de supervision centralisée** hébergée sur le cloud **Amazon Web Services (AWS)**. L'objectif est de déployer une solution capable de monitorer en temps réel un parc informatique hybride composé de serveurs **Linux (Ubuntu)** et **Windows Server**.
+## 📋 Project Overview
 
-La solution technique repose sur la conteneurisation du serveur **Zabbix** via **Docker**, garantissant portabilité, isolation et facilité de déploiement.
+This project focuses on implementing a **centralized monitoring infrastructure** hosted on **Amazon Web Services (AWS)**. The goal is to deploy a robust solution capable of providing real-time monitoring for a hybrid IT environment consisting of **Linux (Ubuntu)** and **Windows Server** instances.
 
-📽️ [Voir la présentation sur Youtube](https://www.youtube.com/watch?v=oBkdGzMjU5s)
+The technical solution relies on containerizing the **Zabbix** server using **Docker**, which guarantees high portability, strict isolation, and simplified deployment procedures.
+
+## 📽️ Video Presentation
+
+Click the image below to watch the full project demonstration on YouTube:
 
 ## 🏗️ Architecture
 
-L'infrastructure est déployée dans un VPC AWS avec la topologie suivante :
+The infrastructure is deployed within an AWS VPC using the following topology:
 
-- **Réseau :** VPC unique avec sous-réseau public et Security Groups stricts.
-- **Serveur :** Instance EC2 `t2.medium` hébergeant la stack Docker (Zabbix Server + Web + DB).
-- **Agents :** Instances EC2 (Linux `t3.micro` & Windows `t3.medium`) avec agents Zabbix configurés.
+* **Network:** Single VPC with a public subnet and strict Security Groups mapping.
+* **Server:** An EC2 `t2.medium` instance hosting the Docker stack (Zabbix Server + Web Interface + Database).
+* **Agents:** EC2 instances (Linux `t3.micro` & Windows `t3.medium`) configured with active Zabbix agents.
 
-📂 **[Voir les détails de l'architecture et les schémas](./architecture/README.md)**
+📂 **[View architecture details and network diagrams](https://www.google.com/search?q=./architecture/README.md)**
 
-## 📂 Structure du Dépôt
+## 📂 Repository Structure
 
-```bash
+```text
 .
-├── 📂 agents/           # Scripts d'installation et configurations des clients (Linux/Windows)
-├── 📂 architecture/     # Diagrammes réseaux et preuves de configuration (Captures)
-├── 📂 rapport/          # Livrable final (PDF) et sources
-├── 📂 server-zabbix/    # Fichiers de déploiement Docker (Docker-compose, env)
-└── README.md            # Ce fichier
+├── 📂 agents/           # Installation scripts and client configurations (Linux/Windows)
+├── 📂 architecture/     # Network diagrams and configuration proofs (Screenshots)
+├── 📂 rapport/          # Final deliverable (PDF) and source files
+├── 📂 server-zabbix/    # Docker deployment files (docker-compose.yml, .env)
+└── README.md            # This file
+
 ```
 
-## 🚀 Guide de Démarrage Rapide
+## 🚀 Quick Start Guide
 
-1. Prérequis
+### 1. Prerequisites
 
-* Un compte AWS actif.
+* An active AWS account.
+* An SSH key pair (`.pem`) for instance access.
+* **Local Machine Preparation (Fedora 43):**
+Ensure you have the necessary tools to connect to your AWS infrastructure and manage the repository:
+```bash
+sudo dnf install openssh-clients git docker
 
-* Une paire de clés SSH (.pem) pour l'accès aux instances.
+```
 
-* Docker et Git installés sur la machine serveur.
 
-2. Installation du Serveur
 
-Connectez-vous à votre instance serveur et clonez ce dépôt :
+### 2. Server Installation
+
+Connect to your AWS server instance via SSH, then clone this repository:
 
 ```bash
-git clone [https://github.com/yss-ef/Infrastructure-Cloud-Supervision-AWS.git](https://github.com/yss-ef/Infrastructure-Cloud-Supervision-AWS.git)
-cd Infrastructure-Cloud-Supervision-AWS/server-zabbix
+git clone https://github.com/yss-ef/[YOUR_REPO_NAME].git
+cd [YOUR_REPO_NAME]/server-zabbix
+
 ```
 
-Lancez la stack via Docker Compose :
+Launch the stack using Docker Compose:
 
 ```bash
-docker-compose up -d
+sudo docker-compose up -d
+
 ```
 
-### 3. Installation des Agents
-Pour connecter vos machines clientes, suivez les instructions détaillées dans le dossier dédié :
-👉 **[Consulter le guide d'installation des Agents](./agents/README.md)**
+### 3. Agent Installation
 
-## 🌐 Accès à l'Interface
+To connect your client machines (Ubuntu/Windows) to the central server, follow the detailed instructions in the dedicated folder:
+👉 **[Consult the Agent Installation Guide](https://www.google.com/search?q=./agents/README.md)**
 
-Une fois le déploiement terminé, l'interface Web Zabbix est accessible via l'IP publique de votre instance AWS :
+## 🌐 Web Interface Access
 
-- **URL :** `http://<VOTRE_IP_PUBLIQUE>:80`
-- **Login par défaut :** `Admin`
-- **Mot de passe :** `zabbix`
+Once the Docker deployment is complete and the containers are healthy, the Zabbix Web interface is accessible via the public IP address of your AWS instance:
 
-## 📄 Rapport de Projet
+* **URL:** `http://<YOUR_PUBLIC_IP>:80`
+* **Default Login:** `Admin`
+* **Default Password:** `zabbix`
 
-Le compte rendu technique détaillé, incluant les justifications des choix architecturaux et les preuves de fonctionnement, est disponible ici :
+## 📄 Project Report
 
-📥 **[Télécharger le Rapport PDF](./rapport/Examen_Cloud_Fellah_Youssef.pdf)**
+The comprehensive technical report, including architectural justifications and operational proofs, is available here:
+
+📥 **[Download the PDF Report](https://www.google.com/search?q=./rapport/Examen_Cloud_Fellah_Youssef.pdf)**
 
 ---
-*Réalisé dans le cadre de la 2ème année Cycle Ingénieur - Université Mundiapolis.*
+
+*Developed as part of the 2nd year Engineering Cycle - Mundiapolis University.*
