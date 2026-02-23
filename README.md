@@ -97,4 +97,6 @@ The comprehensive technical report, including architectural justifications and o
 
 ---
 
+*Authored by Youssef Fellah.*
+
 *Developed as part of the 2nd year Engineering Cycle - Mundiapolis University.*
