@@ -1,90 +1,49 @@
-\# 🏗️ Architecture Cloud \& Réseau
+# 🏗️ Cloud Architecture & Network Design
 
+> **Infrastructure Submodule**
+> This directory thoroughly documents the cloud infrastructure deployed on **Amazon Web Services (AWS)** for the centralized monitoring project. It details the network topology, security configurations, and compute resource provisioning.
 
+## 📑 Table of Contents
 
-Ce dossier documente l'infrastructure déployée sur AWS pour le projet de supervision centralisée.
+* [Network Topology (VPC)](https://www.google.com/search?q=%23%EF%B8%8F-network-topology-vpc)
+* [Security (Security Groups)](https://www.google.com/search?q=%23%EF%B8%8F-security-security-groups)
+* [Compute Resources (EC2)](https://www.google.com/search?q=%23-compute-resources-ec2)
 
+## 🗺️ Network Topology (VPC)
 
+The infrastructure is built upon a single, unified **Virtual Private Cloud (VPC)** configured to securely host both the central monitoring server and the target agents.
 
-\## 🗺️ Topologie Réseau (VPC)
+### Technical Details
 
+* **VPC Name:** `Fellah-Youssef-VPC-Projet-Zabbix`
+* **CIDR Block:** `10.0.0.0/16`
+* **Subnet Type:** Public (configured to facilitate direct access and package downloads during provisioning).
+* **Availability Zone:** `us-east-1` (N. Virginia)
 
+## 🛡️ Security (Security Groups)
 
-L'infrastructure repose sur un \*\*Virtual Private Cloud (VPC)\*\* unique configuré pour héberger à la fois le serveur de supervision et les agents cibles.
+Strict Security Groups have been implemented at the instance level to filter inbound network traffic, ensuring a secure communication channel between the agents and the central server while allowing administrative access.
 
+### Allowed Traffic Matrix
 
+| Protocol | Port | Source | Description |
+| --- | --- | --- | --- |
+| **TCP** | `80` / `443` | Web (Any) | Zabbix Web Interface (HTTP/HTTPS) |
+| **TCP** | `10050` | VPC / Any | Zabbix Agent (Passive polling) |
+| **TCP** | `10051` | VPC / Any | Zabbix Server / Traps (Active polling) |
+| **TCP** | `22` | Admin IP | SSH Administration (Linux) |
+| **TCP** | `3389` | Admin IP | RDP Administration (Windows) |
 
-!\[Topologie VPC](captures/schema\_vpc\_topology.png)
+## 💻 Compute Resources (EC2)
 
+The computing fleet consists of 3 specific instances, meticulously sized according to the project's performance and budgetary recommendations.
 
-
-\### Détails Techniques
-
-\- \*\*Nom du VPC\*\* : `Fellah-Youssef-VPC-Projet-Zabbix`
-
-\- \*\*CIDR Block\*\* : `10.0.0.0/16`
-
-\- \*\*Type de sous-réseau\*\* : Public (pour faciliter l'accès et le téléchargement des paquets)
-
-\- \*\*Zone de disponibilité\*\* : `us-east-1` (N. Virginia)
-
-
-
----
-
-
-
-\## 🛡️ Sécurité (Security Groups)
-
-
-
-Un groupe de sécurité strict a été mis en place pour filtrer le trafic entrant vers les instances.
-
-
-
-!\[Configuration Security Groups](captures/config\_security\_groups.png)
-
-
-
-\### Matrice des flux autorisés
-
-
-
-| Protocole | Port | Source | Description |
-
-| :--- | :--- | :--- | :--- |
-
-| \*\*TCP\*\* | `80` / `443` | Web | Interface Web Zabbix (HTTP/HTTPS) |
-
-| \*\*TCP\*\* | `10050` | VPC / Any | Agent Zabbix (Polling passif) |
-
-| \*\*TCP\*\* | `10051` | VPC / Any | Serveur Zabbix / Traps (Polling actif) |
-
-| \*\*TCP\*\* | `22` | Mon IP | Administration SSH (Linux) |
-
-| \*\*TCP\*\* | `3389` | Mon IP | Administration RDP (Windows) |
-
-
+1. **Zabbix Server** (`t2.medium`): The core instance hosting the Docker engine and the complete Zabbix stack (Server, Web GUI, Database).
+2. **Linux Client** (`t3.micro`): The target Ubuntu machine equipped with the Zabbix agent.
+3. **Windows Client** (`t3.medium`): The target Windows Server 2022 machine equipped with the Zabbix agent.
 
 ---
 
+*Authored by Youssef Fellah.*
 
-
-\## 💻 Ressources de Calcul (EC2)
-
-
-
-Le parc informatique est composé de 3 instances dimensionnées selon les recommandations du projet.
-
-
-
-!\[Instances EC2](captures/aws\_ec2\_instances.png)
-
-
-
-1\. \*\*Serveur Zabbix\*\* (`t2.medium`) : Héberge Docker et la stack Zabbix.
-
-2\. \*\*Client Linux\*\* (`t3.micro`) : Machine cible Ubuntu.
-
-3\. \*\*Client Windows\*\* (`t3.medium`) : Machine cible Windows Server 2022.
-
+*Developed as part of the 2nd year Engineering Cycle - Mundiapolis University.*
