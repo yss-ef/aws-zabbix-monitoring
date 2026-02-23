@@ -1,42 +1,76 @@
-# 🐳 Serveur Zabbix (Docker)
+# 🐳 Zabbix Server Infrastructure (Docker)
 
-Ce dossier contient la configuration Docker Compose pour déployer la stack de supervision.
+> **Core Infrastructure Submodule**
+> This directory contains the complete Docker Compose configuration required to deploy a production-ready Zabbix monitoring stack. Containerization ensures environmental parity, rapid deployment, and isolated dependency management on your AWS instances.
 
-## Services inclus
-- **zabbix-server** : Le cœur du système de monitoring.
-- **zabbix-web** : L'interface graphique (Nginx/Apache).
-- **zabbix-db** : La base de données MySQL 8.0 pour le stockage.
+## 📑 Table of Contents
 
-## 🛠️ Déploiement
+* [Included Services](https://www.google.com/search?q=%23-included-services)
+* [Deployment Guide](https://www.google.com/search?q=%23%EF%B8%8F-deployment-guide)
+* [Configuration & Security](https://www.google.com/search?q=%23%EF%B8%8F-configuration--security)
+* [Accessing the Interface](https://www.google.com/search?q=%23-accessing-the-interface)
 
-1. Assurez-vous d'avoir Docker et Docker Compose installés :
-   ```bash
-   sudo apt update && sudo apt install docker.io docker-compose -y
-   ```
+## 🧩 Included Services
 
-2. Lancez la stack en mode détaché :
+The stack is composed of three primary microservices working in orchestration:
+
+* **`zabbix-server`**: The central processing engine of the monitoring system.
+* **`zabbix-web`**: The graphical user interface (powered by Nginx/Apache).
+* **`zabbix-db`**: A MySQL 8.0 relational database for robust data persistence.
+
+## 🚀 Deployment Guide
+
+Follow these steps to deploy the stack on your **Ubuntu-based AWS EC2 instance**.
+
+**1. Install Docker & Docker Compose**
+Update your package list and install the container engine:
+
 ```bash
-   docker-compose up -d  
-   ```
+sudo apt update && sudo apt install docker.io docker-compose -y
 
-3. Vérifiez que les conteneurs tournent :
-```bash
-docker ps
 ```
 
-## ⚙️ Configuration
-Les variables d'environnement sont gérées via des fichiers séparés pour plus de sécurité :
-- `.env_db_mysql` : Identifiants Base de données.
-- `.env_srv` : Paramètres du backend serveur.
-- `.env_web` : Paramètres du frontend web (Timezone, Nom du serveur).
+**2. Launch the Stack**
+Navigate to this directory and start the containers in detached (background) mode:
 
-## 🌐 Accès
-Une fois lancé, l'interface est accessible sur :
-`http://<IP_PUBLIQUE_AWS>:80`
+```bash
+docker-compose up -d
 
-- **Login** : `Admin`
-- **Password** : `zabbix`
+```
+
+**3. Verify Container Status**
+Ensure all services are healthy and running:
+
+```bash
+docker ps
+
+```
+
+## ⚙️ Configuration & Security
+
+Environment variables are decoupled from the main compose file using dedicated `.env` files to protect sensitive credentials and simplify configuration.
+
+* **`.env_db_mysql`**: Database credentials and root passwords.
+* **`.env_srv`**: Backend server parameters (cache sizes, timeout, etc.).
+* **`.env_web`**: Frontend settings (PHP Timezone, Server display name).
+
+## 🌐 Accessing the Interface
+
+Once the deployment is finalized, the Zabbix Web interface is accessible via the public IP of your AWS instance:
+
+* **URL**: `http://<AWS_PUBLIC_IP>:80`
+* **Default Credentials**:
+* **Login**: `Admin`
+* **Password**: `zabbix`
 
 
 
+---
 
+*Authored by Youssef Fellah.*
+
+*Developed as part of the 2nd year Engineering Cycle - Mundiapolis University.*
+
+---
+
+Would you like me to process another README, or perhaps review your `docker-compose.yml` file to suggest performance optimizations for the MySQL database?
