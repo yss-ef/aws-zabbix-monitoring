@@ -53,8 +53,8 @@ The infrastructure is designed for high portability and visibility across a dist
 ```text
 ├── agents/          # Agent installation scripts (Linux/Windows)
 ├── architecture/    # Network diagrams and topology maps
-├── rapport/         # Technical documentation and performance reports
-├── serveur-zabbix/  # Docker orchestration files (.yml, .env)
+├── report/          # Technical documentation and performance reports
+├── zabbix-server/   # Docker orchestration files (.yml, .env)
 └── README.md        # System documentation
 ```
 
@@ -71,7 +71,7 @@ The infrastructure is designed for high portability and visibility across a dist
 1.  Access your monitoring EC2 instance via SSH.
 2.  Navigate to the server directory:
     ```bash
-    cd serveur-zabbix
+    cd zabbix-server
     ```
 3.  Initialize the stack:
     ```bash
