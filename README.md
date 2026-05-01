@@ -1,102 +1,96 @@
-# ☁️ AWS Centralized Cloud Monitoring Infrastructure | Zabbix & Docker
+# AWS Cloud Monitoring Infrastructure: Centralized Zabbix Deployment
 
-> **Academic Project - Cloud Computing** | **Year:** 2025/2026 | **Author:** Youssef Fellah
+A robust, enterprise-grade monitoring solution architected on Amazon Web Services (AWS). This project implements a centralized observability stack using Zabbix containerized via Docker to monitor a hybrid cloud environment consisting of Linux and Windows Server EC2 instances.
 
-## 📑 Table of Contents
+## Technical Architecture
 
-* [Project Overview](https://www.google.com/search?q=%23-project-overview)
-* [Video Presentation](https://www.google.com/search?q=%23-video-presentation)
-* [Architecture](https://www.google.com/search?q=%23%EF%B8%8F-architecture)
-* [Repository Structure](https://www.google.com/search?q=%23-repository-structure)
-* [Quick Start Guide](https://www.google.com/search?q=%23-quick-start-guide)
-* [Web Interface Access](https://www.google.com/search?q=%23-web-interface-access)
-* [Project Report](https://www.google.com/search?q=%23-project-report)
+The infrastructure is designed for high portability and visibility across a distributed cloud network:
 
-## 📋 Project Overview
+1.  **Monitoring Core**: A Docker-composed stack (Zabbix Server, Web Frontend, and MySQL Database) hosted on an AWS EC2 instance.
+2.  **Telemetry Collection**: Distributed Zabbix Agents deployed on target EC2 instances (Ubuntu and Windows Server).
+3.  **Network Topology**: Deployed within a custom AWS VPC with granular Security Group rules for encrypted telemetry traffic.
+4.  **Containerization**: Leveraging Docker for service isolation and rapid deployment of the monitoring core.
 
-This project focuses on implementing a **centralized monitoring infrastructure** hosted on **Amazon Web Services (AWS)**. The goal is to deploy a robust solution capable of providing real-time monitoring for a hybrid IT environment consisting of **Linux (Ubuntu)** and **Windows Server** instances.
+---
 
-The technical solution relies on containerizing the **Zabbix** server using **Docker**, which guarantees high portability, strict isolation, and simplified deployment procedures.
+## Technical Stack
 
-## 📽️ Video Presentation
+*   **Cloud Provider**: Amazon Web Services (AWS)
+*   **Infrastructure**: EC2 (Elastic Compute Cloud), VPC (Virtual Private Cloud)
+*   **Monitoring Engine**: Zabbix 6.x / 7.x
+*   **Containerization**: Docker / Docker Compose
+*   **Operating Systems**: Ubuntu (Linux), Windows Server 2022
+*   **Database**: MySQL (Relational persistence for metrics)
 
-Click the image below to watch the full project demonstration on YouTube:
+---
 
-## 🏗️ Architecture
+## System Features
 
-The infrastructure is deployed within an AWS VPC using the following topology:
+### 1. Centralized Observability
+*   Single-pane-of-glass dashboard for monitoring disparate cloud assets.
+*   Real-time health tracking of CPU, memory, disk I/O, and network throughput.
+*   Automated alerting system for critical infrastructure events.
 
-* **Network:** Single VPC with a public subnet and strict Security Groups mapping.
-* **Server:** An EC2 `t2.medium` instance hosting the Docker stack (Zabbix Server + Web Interface + Database).
-* **Agents:** EC2 instances (Linux `t3.micro` & Windows `t3.medium`) configured with active Zabbix agents.
+### 2. Containerized Deployment
+*   Microservices-based architecture for the Zabbix core.
+*   Environment isolation using Docker volumes for persistent metric storage.
+*   Simplified scaling and update cycles via Docker Compose orchestration.
 
-📂 **[View architecture details and network diagrams](https://www.google.com/search?q=./architecture/README.md)**
+### 3. Hybrid Agent Configuration
+*   **Linux Agents**: Automated installation and configuration via shell scripts for Ubuntu instances.
+*   **Windows Agents**: Systematic deployment for Windows Server monitoring using MSI installers and custom configuration files.
+*   **Active/Passive Monitoring**: Support for both agent-push and server-pull data collection methods.
 
-## 📂 Repository Structure
+### 4. Cloud Security
+*   Ingress/Egress filtering via AWS Security Groups (Ports 10050/10051).
+*   Encrypted communication between agents and the central server.
+*   Role-based access control for the monitoring web interface.
+
+---
+
+## Project Structure
 
 ```text
-.
-├── 📂 agents/           # Installation scripts and client configurations (Linux/Windows)
-├── 📂 architecture/     # Network diagrams and configuration proofs (Screenshots)
-├── 📂 rapport/          # Final deliverable (PDF) and source files
-├── 📂 server-zabbix/    # Docker deployment files (docker-compose.yml, .env)
-└── README.md            # This file
-
+├── agents/          # Agent installation scripts (Linux/Windows)
+├── architecture/    # Network diagrams and topology maps
+├── rapport/         # Technical documentation and performance reports
+├── serveur-zabbix/  # Docker orchestration files (.yml, .env)
+└── README.md        # System documentation
 ```
 
-## 🚀 Quick Start Guide
+---
 
-### 1. Prerequisites
+## Deployment & Setup
 
-* An active AWS account.
-* An SSH key pair (`.pem`) for instance access.
-* **Local Machine Preparation (Fedora 43):**
-Ensure you have the necessary tools to connect to your AWS infrastructure and manage the repository:
-```bash
-sudo dnf install openssh-clients git docker
+### Prerequisites
+*   AWS Account with EC2 permissions.
+*   Docker and Docker Compose installed on the host instance.
+*   Configured Security Groups for Zabbix communication.
 
-```
+### 1. Core Server Deployment
+1.  Access your monitoring EC2 instance via SSH.
+2.  Navigate to the server directory:
+    ```bash
+    cd serveur-zabbix
+    ```
+3.  Initialize the stack:
+    ```bash
+    docker-compose up -d
+    ```
 
+### 2. Agent Provisioning
+Refer to the `agents/` directory for platform-specific instructions to connect remote instances to the central server.
 
+---
 
-### 2. Server Installation
+## Access & Governance
 
-Connect to your AWS server instance via SSH, then clone this repository:
-
-```bash
-git clone https://github.com/yss-ef/[YOUR_REPO_NAME].git
-cd [YOUR_REPO_NAME]/server-zabbix
-
-```
-
-Launch the stack using Docker Compose:
-
-```bash
-sudo docker-compose up -d
-
-```
-
-### 3. Agent Installation
-
-To connect your client machines (Ubuntu/Windows) to the central server, follow the detailed instructions in the dedicated folder:
-👉 **[Consult the Agent Installation Guide](https://www.google.com/search?q=./agents/README.md)**
-
-## 🌐 Web Interface Access
-
-Once the Docker deployment is complete and the containers are healthy, the Zabbix Web interface is accessible via the public IP address of your AWS instance:
-
-* **URL:** `http://<YOUR_PUBLIC_IP>:80`
-* **Default Login:** `Admin`
-* **Default Password:** `zabbix`
-
-## 📄 Project Report
-
-The comprehensive technical report, including architectural justifications and operational proofs, is available here:
-
-📥 **[Download the PDF Report](https://www.google.com/search?q=./rapport/Examen_Cloud_Fellah_Youssef.pdf)**
+The monitoring interface is accessible via the EC2 Public IP on Port 80.
+*   **Default Gateway**: `http://<EC2_PUBLIC_IP>`
+*   **Authentication**: Admin / zabbix (Default - change upon initialization)
 
 ---
 
 *Authored by Youssef Fellah.*
 
-*Developed as part of the 2nd year Engineering Cycle - Mundiapolis University.*
+*Developed for the Engineering Cycle - Mundiapolis University.*
