@@ -47,7 +47,5 @@ The computing fleet consists of three specific instances, sized according to per
 *   [Infrastructure Screenshots](screenshots/)
 
 ---
-
 *Authored by Youssef Fellah.*
-
 *Developed for the Engineering Cycle - Mundiapolis University.*

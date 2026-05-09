@@ -56,7 +56,5 @@ Once the deployment is finalized, the Zabbix Web interface is accessible via the
     *   **Password**: `zabbix`
 
 ---
-
 *Authored by Youssef Fellah.*
-
 *Developed for the Engineering Cycle - Mundiapolis University.*

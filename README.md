@@ -90,7 +90,5 @@ The monitoring interface is accessible via the EC2 Public IP on Port 80.
 *   **Authentication**: Admin / zabbix (Default - change upon initialization)
 
 ---
-
 *Authored by Youssef Fellah.*
-
 *Developed for the Engineering Cycle - Mundiapolis University.*

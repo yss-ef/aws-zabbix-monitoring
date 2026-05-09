@@ -59,7 +59,5 @@ If the central server cannot reach an agent, verify the following:
 *   **Service Status (Windows)**: `Get-Service 'Zabbix Agent'`
 
 ---
-
 *Authored by Youssef Fellah.*
-
 *Developed for the Engineering Cycle - Mundiapolis University.*

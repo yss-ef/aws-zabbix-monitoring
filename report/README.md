@@ -37,7 +37,5 @@ The document provides an exhaustive analysis of the following technical pillars:
 The `sources/` directory contains the raw LaTeX files and assets used to generate the report, including the university logo and system screenshots.
 
 ---
-
 *Authored by Youssef Fellah.*
-
 *Developed for the Engineering Cycle - Mundiapolis University.*
