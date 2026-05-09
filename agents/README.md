@@ -58,6 +58,5 @@ If the central server cannot reach an agent, verify the following:
 *   **Service Status (Linux)**: `systemctl status zabbix-agent`
 *   **Service Status (Windows)**: `Get-Service 'Zabbix Agent'`
 
----
-*Authored by Youssef Fellah.*
-*Developed for the Engineering Cycle - Mundiapolis University.*
+Authored by Youssef Fellah.  
+Developed for the Engineering Cycle - Mundiapolis University.

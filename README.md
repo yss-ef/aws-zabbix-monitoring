@@ -89,6 +89,5 @@ The monitoring interface is accessible via the EC2 Public IP on Port 80.
 *   **Default Gateway**: `http://<EC2_PUBLIC_IP>`
 *   **Authentication**: Admin / zabbix (Default - change upon initialization)
 
----
-*Authored by Youssef Fellah.*
-*Developed for the Engineering Cycle - Mundiapolis University.*
+Authored by Youssef Fellah.  
+Developed for the Engineering Cycle - Mundiapolis University.
