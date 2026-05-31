@@ -1,25 +1,33 @@
-# Cloud Architecture & Network Design
+# Cloud architecture and network design
 
-This directory thoroughly documents the cloud infrastructure deployed on Amazon Web Services (AWS) for the centralized monitoring project. It details the network topology, security configurations, and compute resource provisioning.
+Bottom Line Up Front: This directory documents the cloud infrastructure deployed
+on Amazon Web Services (AWS) for the centralized monitoring project. It details
+the network topology, security configurations, and compute resource
+provisioning.
 
-## Network Topology (VPC)
+## Network topology (VPC)
 
-The infrastructure is built upon a single, unified Virtual Private Cloud (VPC) configured to securely host both the central monitoring server and the target agents.
+The infrastructure is built upon a single, unified Virtual Private Cloud (VPC)
+configured to securely host both the central monitoring server and the target
+agents.
 
-### Technical Details
+### Technical details
 
-*   **VPC Name**: `Fellah-Youssef-VPC-Projet-Zabbix`
-*   **CIDR Block**: `10.0.0.0/16`
-*   **Subnet Type**: Public (configured to facilitate direct access and package downloads during provisioning).
-*   **Availability Zone**: `us-east-1` (N. Virginia)
+*   **VPC name**: `Fellah-Youssef-VPC-Projet-Zabbix`
+*   **CIDR block**: `10.0.0.0/16`
+*   **Subnet type**: Public (configured to facilitate direct access and package
+    downloads during provisioning).
+*   **Availability zone**: `us-east-1` (N. Virginia)
 
 ---
 
-## Security (Security Groups)
+## Security (security groups)
 
-Strict Security Groups have been implemented at the instance level to filter inbound network traffic, ensuring a secure communication channel between the agents and the central server while allowing administrative access.
+Strict security groups have been implemented at the instance level to filter
+inbound network traffic, ensuring a secure communication channel between the
+agents and the central server while allowing administrative access.
 
-### Allowed Traffic Matrix
+### Allowed traffic matrix
 
 | Protocol | Port | Source | Description |
 | --- | --- | --- | --- |
@@ -31,20 +39,24 @@ Strict Security Groups have been implemented at the instance level to filter inb
 
 ---
 
-## Compute Resources (EC2)
+## Compute resources (EC2)
 
-The computing fleet consists of three specific instances, sized according to performance and budgetary requirements:
+The computing fleet consists of three specific instances, sized according to
+performance and budgetary requirements:
 
-1.  **Zabbix Server** (`t2.medium`): Core instance hosting the Docker engine and the complete Zabbix stack (Server, Web GUI, Database).
-2.  **Linux Client** (`t3.micro`): Target Ubuntu machine equipped with the Zabbix agent.
-3.  **Windows Client** (`t3.medium`): Target Windows Server 2022 machine equipped with the Zabbix agent.
+1.  **Zabbix server** (`t2.medium`): Core instance hosting the Docker engine
+    and the complete Zabbix stack (Server, Web GUI, database).
+2.  **Linux client** (`t3.micro`): Target Ubuntu machine equipped with the
+    Zabbix agent.
+3.  **Windows client** (`t3.medium`): Target Windows Server 2022 machine
+    equipped with the Zabbix agent.
 
 ---
 
-## Visual Documentation
+## Visual documentation
 
-*   [Architecture Diagram](security-schema.png)
-*   [Infrastructure Screenshots](screenshots/)
+*   [Architecture diagram](security-schema.png)
+*   [Infrastructure screenshots](screenshots/)
 
-Authored by Youssef Fellah.  
+Authored by Youssef Fellah.
 Developed for the Engineering Cycle - Mundiapolis University.
